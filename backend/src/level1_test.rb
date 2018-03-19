@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require_relative 'main'
+require "json"
 
 def create_cars
   cars = [
@@ -44,7 +45,7 @@ class SolutionTest < Minitest::Test
       "end_date" => "2017-12-10",
       "distance" => 100
     })
-    assert_equal compute_rental_price(rental, create_cars()), 7000
+    assert_equal compute_rental_price_level1(rental, create_cars()), 7000
   end
 
   def test_format_result
@@ -60,25 +61,9 @@ class SolutionTest < Minitest::Test
     assert_equal format_result(rentals, cars), result
   end
 
-  def test_solution
-    input = {
-      "cars" => [
-        { "id" => 1, "price_per_day" => 2000, "price_per_km" => 10 },
-        { "id" => 2, "price_per_day" => 3000, "price_per_km" => 15 },
-        { "id" => 3, "price_per_day" => 1700, "price_per_km" => 8 }
-      ],
-      "rentals" => [
-        { "id" => 1, "car_id" => 1, "start_date" => "2017-12-8", "end_date" => "2017-12-10", "distance" => 100 },
-        { "id" => 2, "car_id" => 1, "start_date" => "2017-12-14", "end_date" => "2017-12-18", "distance" => 550 },
-        { "id" => 3, "car_id" => 2, "start_date" => "2017-12-8", "end_date" => "2017-12-10", "distance" => 150 }
-      ]
-    }
-    assert_equal solution(input), {
-                   :rentals => [
-                     {:id => 1, :price => 7000},
-                     {:id => 2, :price => 15500},
-                     {:id => 3, :price => 11250}
-                   ]
-                 }
+  def test_solution_level1
+    solution_level1()
+    assert_equal File.read('../level1/data/expected_output.json'), File.read("output_level1.json")
   end
+
 end
