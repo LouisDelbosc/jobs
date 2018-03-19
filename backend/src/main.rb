@@ -22,6 +22,17 @@ class Rental
   end
 end
 
+class Commission
+  attr_reader :insurrance, :assistance, :drivy
+
+  def initialize(price, days)
+    total = (price * 0.3).round
+    @insurrance = total / 2
+    @assistance = days * 100
+    @drivy = total - insurrance - assistance
+  end
+end
+
 # ================ Level 1 ================
 
 def load_data(input_file)
@@ -91,4 +102,28 @@ def solution_level2()
                                         :price => compute_rental_price_level2(rental, cars)
                                       }}}
   write_result("output_level2.json", result)
+end
+
+# ================ Level 3 ================
+
+def format_commission(commission)
+  {
+    :insurance_fee => commission.insurrance,
+    :assistance_fee => commission.assistance,
+    :drivy_fee => commission.drivy,
+  }
+end
+
+def solution_level3()
+  json = load_data('../level3/data/input.json')
+  cars = json["cars"].map { |car| Car.new(car) }
+  rentals = json["rentals"].map { |rental| Rental.new(rental) }
+  result = {:rentals => rentals.map { |rental|
+              price = compute_rental_price_level2(rental, cars)
+              {
+                :id => rental.id,
+                :price => price,
+                :commission => format_commission(Commission.new(price, rental.days))
+              }}}
+  write_result("output_level3.json", result)
 end
