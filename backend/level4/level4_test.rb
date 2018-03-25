@@ -45,6 +45,6 @@ class SolutionTest < Minitest::Test
 
   def test_solution
     solution()
-    assert_equal File.read('./data/expected_output.json'), File.read("output.json")
+    assert_equal File.read('./data/expected_output.json'), File.read("./data/output.json")
   end
 end

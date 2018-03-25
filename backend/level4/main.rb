@@ -90,6 +90,6 @@ def solution
   json = load_data('data/input.json')
   cars = json["cars"].map { |car| Car.new(car) }
   rentals = json["rentals"].map { |rental| Rental.new(rental) }
-  write_data('output.json',
+  write_data('./data/output.json',
              {:rentals => rentals.map { |rental| format_rental_result(rental, cars)}})
 end

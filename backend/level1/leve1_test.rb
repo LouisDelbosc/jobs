@@ -45,7 +45,7 @@ class SolutionTest < Minitest::Test
       "end_date" => "2017-12-10",
       "distance" => 100
     })
-    assert_equal compute_rental_price_level1(rental, create_cars()), 7000
+    assert_equal compute_rental_price(rental, create_cars()), 7000
   end
 
   def test_format_result
@@ -62,8 +62,8 @@ class SolutionTest < Minitest::Test
   end
 
   def test_solution_level1
-    solution_level1()
-    assert_equal File.read('../level1/data/expected_output.json'), File.read("output_level1.json")
+    solution()
+    assert_equal File.read('./data/expected_output.json'), File.read("./data/output.json")
   end
 
 end

@@ -28,7 +28,7 @@ class SolutionTest < Minitest::Test
   end
 
   def test_solution_level3
-    solution_level3()
-    assert_equal File.read('../level3/data/expected_output.json'), File.read("output_level3.json")
+    solution()
+    assert_equal File.read('./data/expected_output.json'), File.read("./data/output.json")
   end
 end

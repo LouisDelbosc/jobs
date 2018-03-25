@@ -37,13 +37,13 @@ class SolutionTest < Minitest::Test
   def test_compute_rental_price_level2
     rentals = create_rentals()
     cars = create_cars()
-    assert_equal compute_rental_price_level2(rentals[0], cars), 3000
-    assert_equal compute_rental_price_level2(rentals[1], cars), 6800
-    assert_equal compute_rental_price_level2(rentals[2], cars), 27800
+    assert_equal compute_rental_price(rentals[0], cars), 3000
+    assert_equal compute_rental_price(rentals[1], cars), 6800
+    assert_equal compute_rental_price(rentals[2], cars), 27800
   end
 
-  def test_solution_level2
-    solution_level2()
-    assert_equal File.read('../level2/data/expected_output.json'), File.read("output_level2.json")
+  def test_solution
+    solution()
+    assert_equal File.read('./data/expected_output.json'), File.read("./data/output.json")
   end
 end
